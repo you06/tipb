@@ -16,9 +16,8 @@ endforeach()
 
 add_custom_command(
     OUTPUT ${OUTPUT_SOURCES}
-    COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/.. &&
-            PROTOC=${_PROTOBUF_PROTOC} ./generate-cpp.sh &&
-            cd -
+    COMMAND PROTOC=${_PROTOBUF_PROTOC} ./generate-cpp.sh
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/..
     DEPENDS ${PROTO_FILE}
 )
 
