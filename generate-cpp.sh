@@ -1,4 +1,10 @@
 #!/bin/bash
+
+if [ -z "$PROTOC" ]; then
+    echo "use system protoc."
+    PROTOC="protoc"
+fi
+
 set -euo pipefail
 
 rm -rf proto-cpp && mkdir -p proto-cpp
@@ -21,7 +27,7 @@ sed_inplace -e 's/\[.*gogoproto.*\]//g' proto-cpp/*
 
 cd proto-cpp
 echo "generate cpp code..."
-protoc --cpp_out=../cpp/tipb/ *.proto
+${PROTOC} --cpp_out=../cpp/tipb/ *.proto
 cd ..
 
 rm -rf proto-cpp
